@@ -271,6 +271,20 @@
     </span>
 
   
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine：</span>
+  
+    <a title="valine" href="/2022/02/12/test/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/02/12/test/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 </div>
 
         </div>
@@ -340,6 +354,20 @@
       <time title="修改时间：2022-02-12 23:55:56" itemprop="dateModified" datetime="2022-02-12T23:55:56+08:00">2022-02-12</time>
     </span>
 
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine：</span>
+  
+    <a title="valine" href="/2022/02/11/hello-world/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/02/11/hello-world/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
   
 </div>
 
@@ -437,6 +465,21 @@
 
 
 
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"hTT7fUpM5AYGwtuhkIObcb1A-gzGzoHsz","appKey":"QCoUlqblnMFXCKDyn78a6zPM","serverURLs":"https://www.flamingo-sky.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"el":"#valine-comments","path":"/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
 
 </body>
 </html>
