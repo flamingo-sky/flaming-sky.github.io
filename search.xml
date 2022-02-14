@@ -38,7 +38,7 @@
 <p>Title 随便取个名字，粘贴复制的 id_rsa.pub 内容到 Key 中，点击 Add SSH key 完成添加。</p>
 <p><strong>验证连接</strong>：</p>
 <blockquote>
-<p>打开 Git Bash，输入 ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;</a> 出现 “Are you sure……”，输入 yes 回车确认</p>
+<p>打开 Git Bash，输入 ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a> 出现 “Are you sure……”，输入 yes 回车确认</p>
 </blockquote>
 <blockquote>
 <p>显示 “Hi xxx! You’ve successfully……” 即连接成功。</p>
@@ -142,8 +142,237 @@
       </tags>
   </entry>
   <entry>
-    <title>测试</title>
-    <url>/2022/02/13/test/</url>
-    <content><![CDATA[]]></content>
+    <title>hexo优化</title>
+    <url>/2021/04/13/hexo%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<blockquote>
+<p>博客访问速度太慢，采用了netflix cdn为博客加速。</p>
+</blockquote>
+<h1 id="Hexo优化"><a href="#Hexo优化" class="headerlink" title="Hexo优化"></a>Hexo优化</h1><h2 id="Netflix-CDN加速"><a href="#Netflix-CDN加速" class="headerlink" title="Netflix CDN加速"></a>Netflix CDN加速</h2>]]></content>
+      <categories>
+        <category>网站建设</category>
+        <category>Hexo 博客</category>
+      </categories>
+      <tags>
+        <tag>Hexo 博客</tag>
+        <tag>搭建环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>zookeeper学习笔记</title>
+    <url>/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="一-基础概念"><a href="#一-基础概念" class="headerlink" title="一. 基础概念"></a>一. 基础概念</h2><h3 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h3><ul>
+<li>leader</li>
+<li>follower</li>
+<li>observer</li>
+</ul>
+<h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><ul>
+<li>客户端和服务端之间连接的一个TCP长连接，zookeeper对外的服务端口默认是2181.</li>
+</ul>
+<h3 id="数据节点"><a href="#数据节点" class="headerlink" title="数据节点"></a>数据节点</h3><ul>
+<li>机器节点：构成集群的机器</li>
+<li>数据节点：指数据模型中的数据单元</li>
+</ul>
+<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>Zookeeper会为每个ZNode维护一个Stat的数据结构，Stat记录了这个ZNode的三个数据版本，分别是version（当前ZNode版本）、cversion（当前ZNode子节点版本）、aversion（当前ZNode的ACL版本）。</p>
+<h3 id="事件监听器（watcher）"><a href="#事件监听器（watcher）" class="headerlink" title="事件监听器（watcher）"></a>事件监听器（watcher）</h3><p>在指定节点上注册一些Watcher，这些事件监听器触发时，Zookeeper服务端会将事件通知给感兴趣的客户端，这机制是Zookeeper实现分布式协调服务的重要特性。</p>
+<h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><p>ACL（Access Control Lists）权限控制策略。如下五种权限：</p>
+<ul>
+<li>CREATE：创建<strong>子节点</strong>的权限</li>
+<li>READ：获取节点数据和子节点列表的权限</li>
+<li>WRITE：更新节点数据的权限</li>
+<li>DELETE：删除<strong>子节点</strong>的权限</li>
+<li>ADMIN：设置节点ACL的权限</li>
+</ul>
+<h2 id="二-基本使用"><a href="#二-基本使用" class="headerlink" title="二. 基本使用"></a>二. 基本使用</h2><h3 id="1-zookeeper系统模型"><a href="#1-zookeeper系统模型" class="headerlink" title="1. zookeeper系统模型"></a>1. zookeeper系统模型</h3><p>在Zookeeper中数据信息被保存在一个个数据节点上,这些节点被称为ZNode。ZNode是zookeeper中最小数据单位，类似文件系统的层级树状结构。</p>
+<p><img src="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200701074846031.png"></p>
+<h4 id="1-1-ZNode的类型"><a href="#1-1-ZNode的类型" class="headerlink" title="1.1 ZNode的类型"></a>1.1 ZNode的类型</h4><p>数据节点ZNode的节点类型分类：持久性节点（Persistent）、临时性节点（Ephemeral）、顺序性节点（Sequential）。</p>
+<p>创建节点时可以通过组合生成以下四种节点类型：持久节点、持久顺序节点、临时节点、临时顺序节点。<strong>不同类型的节点会有不同的生命周期</strong>。</p>
+<ul>
+<li>持久节点：节点被创建后会一直存在服务器，知道删除操作主动清除</li>
+<li>持久顺序节点：创建节点时会在节点名后面加上一个数字后缀来表示顺序，和持久节点特性一样</li>
+<li>临时节点：生命周期和客户端会话绑在一起，客户端会话结束，节点会被删除；不能创建子节点</li>
+<li>临时顺序节点：有顺序的临时节点</li>
+</ul>
+<p>在zookeeper中，事务是指能够改变zookeeper服务器状态的操作，称为事务操作和更新操作。一般包括数据节点的创建与删除、数据节点内容更新等操作。</p>
+<p>每一次事务请求，zk都会为其分配一个全局唯一的事务id，用ZXID表示，通常是一个64位数字。每一个ZXID对应一次更新更新操作。</p>
+<h4 id="1-2-ZNode的状态信息"><a href="#1-2-ZNode的状态信息" class="headerlink" title="1.2 ZNode的状态信息"></a>1.2 ZNode的状态信息</h4><p><img src="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200701074954030.png"></p>
+<p>整个ZNode节点内容包括两部分：节点数据内容和节点状态信息。quota是数据内容，其它属于状态信息。</p>
+<ul>
+<li><p>cZxid 就是 Create ZXID，表示节点被创建时的事务ID。</p>
+</li>
+<li><p>ctime 就是 Create Time，表示节点创建时间。</p>
+</li>
+<li><p>mZxid 就是 Modified ZXID，表示节点最后⼀次被修改时的事务ID。</p>
+</li>
+<li><p>mtime 就是 Modified Time，表示节点最后⼀次被修改的时间。</p>
+</li>
+<li><p>pZxid 表示该节点的⼦节点列表最后⼀次被修改时的事务 ID。只有⼦节点列表变更才会更新 pZxid，⼦节点内容变更不会更新。</p>
+</li>
+<li><p>cversion 表示⼦节点的版本号。</p>
+</li>
+<li><p>dataVersion 表示内容版本号。</p>
+</li>
+<li><p>aclVersion 标识acl版本。</p>
+</li>
+<li><p>ephemeralOwner 表示创建该临时节点时的会话 sessionID，如果是持久性节点那么值为 0。</p>
+</li>
+<li><p>dataLength 表示数据⻓度。</p>
+</li>
+<li><p>numChildren 表示直系⼦节点数。</p>
+</li>
+<li><p>1.3 Watcher数据变更通知</p>
+<p>Zookeeper使用Watcher机制实现分布式数据的发布&#x2F;订阅功能。多个订阅者同时监听某一个主题对象，主题对象状态发生变化时，会通知所有的订阅者做出相应处理。</p>
+<p>Zookeeper允许客户端向服务端注册一个Watcher监听，当服务端的指定事件触发了Watcher，就会向指定客服端发送一个事件通知。</p>
+<p><img src="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200701075035071.png" alt="image-20200701075035071"></p>
+</li>
+</ul>
+<p>Zookeeper的Watcher机制包括<strong>客户端线程、客服端WatcherManager、Zookeeper服务器</strong>三部分。</p>
+<p><strong>具体流程</strong>：客户端向zk服务器注册的同时会将Watcher对象存储在客户端的WatcherManager中，当Zookeeper服务器触发Watcher使劲按后回向客服端发送通知，客户端线程从WatcherManager中取出对应的Watcher对象来执行回调逻辑。</p>
+<h4 id="1-4-ACL保障数据的安全"><a href="#1-4-ACL保障数据的安全" class="headerlink" title="1.4 ACL保障数据的安全"></a>1.4 ACL保障数据的安全</h4><p>在Zookeeper中提供了一套完善的ACL（Access Control List）权限控制机制来保障数据的安全。</p>
+<p>通常会使用“权限模式（scheme）：授权对象（id）：权限（permission）”来标志一个有效的ACL信息。</p>
+<ul>
+<li><strong>权限模式</strong>用来确定权限验证中使用的检验策略</li>
+<li><strong>授权对象</strong>指的是权限赋予的用户或一个指定实体</li>
+<li><strong>权限</strong>指通过权限检查后可以被允许执行的操作</li>
+</ul>
+<p>权限与授权对象的关系：</p>
+<table>
+<thead>
+<tr>
+<th align="left">权限模式</th>
+<th>授权对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">IP</td>
+<td>通常使用IP地址或IP段。例如：192.168.91.105（IP）或 192.168.91.1&#x2F;24（网段）</td>
+</tr>
+<tr>
+<td align="left">Digest</td>
+<td>自定义，通常是username：BASE64（SHA-1（username：password））进行加密再编码</td>
+</tr>
+<tr>
+<td align="left">World</td>
+<td>只有一个ID：anyone</td>
+</tr>
+<tr>
+<td align="left">Super</td>
+<td>超级用户</td>
+</tr>
+</tbody></table>
+<p>权限分为五大类：CREATE（子节点）、DELETE（子节点）、READ、WRITE、ADMIN（对节点进行ACL设置）。简称为CDRWA。</p>
+<h3 id="2-命令行操作"><a href="#2-命令行操作" class="headerlink" title="2.命令行操作"></a>2.命令行操作</h3><p>对节点的增删改查常用命令：输入help后，回显示可用的Zookeeper命令</p>
+<ul>
+<li>create 【-s】【-e】path data acl：创建节点（顺序&#x2F;临时） &#x2F;zlg 123</li>
+<li>ls path：显示节点的所有直系子节点</li>
+<li>get path：显示节点的内容和属性信息</li>
+<li>ls2 path：显示节点的直系子节点列表和属性信息</li>
+<li>set path data 【version】：更新指定节点的数据内容，data表示更新的内容，version表示数据版本</li>
+<li>delete path 【version】：删除指定的节点，version表示数据版本（dataVersion），若删除节点存在子节点，就无法删除该节点，必须先删除子节点，再删除父节点</li>
+</ul>
+<h3 id="3-相关客户端api使用"><a href="#3-相关客户端api使用" class="headerlink" title="3.相关客户端api使用"></a>3.相关客户端api使用</h3><p>有Zookeeper的原生API、ZkClient、Curator 三种使用方式。下面对这三种使用方式的API做下对比：</p>
+<p>引入依赖：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">3.4</span><span class="number">.14</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.101tec&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;zkclient&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">0.2</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;curator-framework&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.12</span><span class="number">.0</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>原生部分API：</p>
+<ul>
+<li>创建会话：new Zookeeper(connectString,sesssionTimeOut,Watcher)</li>
+<li>创建节点：zookeeper.create(path,data,acl,createMode)</li>
+<li>删除节点：zookeeper.delete(path,version)</li>
+<li>获取数据：zk.getData(path, watch, stat)</li>
+<li>获取子节点列表：zooKeeper.getChildren(path, watch)</li>
+<li>更新数据：zooKeeper.setData(path, data,version)</li>
+</ul>
+<p>ZkClient客户端：</p>
+<ul>
+<li>创建会话：new ZkClient(serverString)</li>
+<li>创建节点：zkClient.createPersistent(String path, boolean createParents)</li>
+<li>删除节点：zkClient.deleteRecursive(String path)</li>
+<li>获取数据：zkClient.readData(path)</li>
+<li>获取子节点列表：zkClient.getChildren(path)</li>
+<li>更新数据：zkClient.writeData(path, object)</li>
+<li>事件监听：<ul>
+<li>zkClient.subscribeChildChanges(path, new IZkChildListener() {…})</li>
+<li>zkClient.subscribeDataChanges(path, new IZkDataListener() {…}</li>
+</ul>
+</li>
+</ul>
+<p>Curator客户端：</p>
+<ul>
+<li>创建会话：public static CuratorFramework newClient(String connectString, int sessionTimeoutMs, int connectionTimeoutMs, RetryPolicy retryPolicy)</li>
+<li>创建节点：client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPa th(path,data); data需要序列化 data &#x3D; serializer.serialize(new ServerInfo(ip, port, 0L))</li>
+<li>删除节点：client.delete().deletingChildrenIfNeeded().forPath(path)</li>
+<li>获取数据：client.getData().forPath(path)得到的字节数组bytes需要反序列化; serializer.deserialize(ServerInfo.class, bytes);</li>
+<li>获取子节点列表：client.getChildren().forPath(path)</li>
+<li>更新数据：client.setData().forPath(path, data)</li>
+</ul>
+<h2 id="三-zookeeper应用场景"><a href="#三-zookeeper应用场景" class="headerlink" title="三.zookeeper应用场景"></a>三.zookeeper应用场景</h2><p>利用 ZooKeeper 可以非常方便构建一系列分布式应用中都会涉及到的核心功能。</p>
+<ol>
+<li>数据发布&#x2F;订阅</li>
+<li>负载均衡</li>
+<li>命名服务</li>
+<li>分布式协调&#x2F;通知</li>
+<li>集群管理</li>
+<li>Master 选举</li>
+<li>分布式锁</li>
+<li>分布式队列</li>
+</ol>
+<p>多个开源项目中都应用到了 ZooKeeper，例如 HBase, Spark, Flink, Storm, Kafka, Dubbo 等等。</p>
+<p>Zookeeper应用场景文章推荐：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/59669985">ZooKeeper 的应用场景(opens new window)</a></li>
+<li><a href="https://www.javazhiyin.com/28435.html">图解ZooKeeper的典型应用场景(opens new window)</a></li>
+<li><a href="https://www.jianshu.com/p/2e970fe35c3f">ZooKeeper应用场景及方案介绍(opens new window)</a></li>
+<li><a href="https://blog.csdn.net/u013679744/article/details/79371022">Zookeeper系列（6）– Zookeeper的典型应用场景(opens new window)</a></li>
+<li><a href="https://xiaoxiami.gitbook.io/zookeeper/chapter1">Zookeeper应用场景(opens new window)</a></li>
+</ul>
+<p><strong>下面主要看下Zookeeper在分布式锁上的应用场景</strong></p>
+<p>分布式锁是控制分布式系统之间同步访问共享资源的一种方式。如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源,那么访问这些资源的时候,往往需要通过一些互斥手段来防止彼此之间的干扰,以保证一致性,在这种情况下,就需要使用分布式锁了。下面看下<strong>Zookeeper如何实现排他锁和共享锁两类分布式锁</strong>。</p>
+<h4 id="1-排他锁"><a href="#1-排他锁" class="headerlink" title="1.排他锁"></a>1.排他锁</h4><p>排他锁(Exclusive Locks,简称×锁) ,又称为写锁或独占锁,是一种基本的锁类型。如果事务T1对数据对象o1加上了排他锁,那么在整个加锁期间,只允许事务T1对o1进行读取和更新操作,其他任何事务都不能再对这个数据对象进行任何类型的操作——直到T1释放了排他锁。</p>
+<p>排他锁的核心是如何保证当前有且仅有一个事务获,得锁,并且锁被释放后,所有正在等待获取锁的事务都能够被通知到。</p>
+<p>Zookeeper实现排他锁步骤如下：</p>
+<p><strong>1.定义锁</strong></p>
+<p>Java并发编程中可以使用synchronized机制和ReentrantLock来定义锁。Zookeeper中需要定义一个<strong>临时节点</strong>来表示一个锁，如&#x2F;exclusive_lock&#x2F;lock节点可以被定义为一个锁。如图：</p>
+<p><img src="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20201112002600677.png" alt="image-20201112002600677"></p>
+<p><strong>2.获取锁</strong></p>
+<p>在需要获取排他锁时，<strong>所有客户端</strong>都试图在&#x2F;exclusive_lock节点下通过调用create()接口<strong>创建临时子节点</strong>。谁创建成功了就表示谁获取了排他锁，同时所有<strong>没有获取到锁</strong>的客户端就需要在&#x2F;exclusive_lock节点上<strong>注册一个子节点变更的Watcher监听</strong>，来监听子节点的变化情况。</p>
+<p><strong>3.释放锁</strong></p>
+<p>当获取锁的客户端发生宕机或正常执行完业务逻辑后，临时节点都会被移出，也就释放了锁。Zookeeper就会通知所有在&#x2F;exclusive_lock节点上注册监听的客户端，客户端接收到通知后再次发起分布式锁获取。</p>
+<p><img src="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20201112003645536.png" alt="image-20201112003645536"></p>
+<h4 id="2-共享锁"><a href="#2-共享锁" class="headerlink" title="2.共享锁"></a>2.共享锁</h4><p>共享锁(Shared Locks,简称S锁) ,又称为读锁,同样是一种基本的锁类型。如果事务T1对数据对象o1加上了共享锁,那么当前事务只能对o1进行读取操作,其他事务也只能对这个数据对象加共享锁——直到该数据对象上的所有共享锁都被释放。</p>
+<p>共享锁和排他锁最根本的区别在于：<strong>加上排他锁后,数据对象只对一个事务可见,而加上共享锁后,数据对所有事务都可见</strong>。</p>
+<p>Zookeeper实现共享锁步骤如下：</p>
+<p><strong>1.定义锁</strong></p>
+<p>Zookeeper上通过定义一个<strong>临时顺序节点</strong>来代表一个共享锁。如&#x2F;share_lock&#x2F;host1-R-0000000001，如图所示：</p>
+<p><img src="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20201112004211314.png" alt="image-20201112004211314"></p>
+<p><strong>2.获取锁</strong></p>
+<p>在需要获取共享锁时,所有客户端都会到&#x2F;shared lock这个节点下面创建一个临时顺序节点,如果当前是读请求,那么就创建例如&#x2F;shared lock&#x2F;host1-R-000000000节点;如果是写请求,那么就创建例如&#x2F;sharedlock&#x2F;host2-W-0000000002的节点。</p>
+<p>判断读写顺序：通过Zookeeper来去确定分布式读写顺序，大致分为四步。</p>
+<blockquote>
+<p>1,创建完节点后,获取&#x2F;shared-lock节点下所有子节点,并对该节点变更注册监听。</p>
+<p>2,确定自己的节点序号在所有子节点中的顺序。</p>
+<p>3,对于读请求:若没有比自己序号小的子节点或所有比自己序号小的子节点都是读请求,那么表明自己已经成功获取到共享锁,同时开始执行读取逻辑,若有写请求,则需要等待。对于写请求:若自己不是序号最小的子节点,那么需要等待。</p>
+<p>4,接收到Watcher通知后,重复步骤1</p>
+</blockquote>
+<p><strong>3.释放锁</strong>，流程与排他锁一致。</p>
+<h4 id="3-羊群效应"><a href="#3-羊群效应" class="headerlink" title="3.羊群效应"></a>3.羊群效应</h4><p>上面的共享锁的实现大体能满足集群规模不是特别大的场景。当规模扩大之后，会出现什么问题呢？结合下图看下实际运行情况：</p>
+<p><img src="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20201112005701385.png" alt="image-20201112005701385"></p>
+<p>可以看到，host1客户端移出自己的共享锁后，只对host2产生影响了，对其它机器没有任何作用。大量的Watcher通知和子节点列表获取两个操作会重复运行,这样不仅会对zookeeper服务器造成巨大的性能影响影响和网络开销,更为严重的是,如果同一时间有多个节点对应的客户端完成事务或是事务中断引起节点消失, ZooKeeper服务器就会在短时间内向其余客户端发送大量的事件通知,这就是所谓的羊群效应。</p>
+<p>上面的分布式锁竞争过程,它的核心逻辑在于:判断自己是否是所有子节点中序号最小的。于时可以联想到<strong>每个节点对应的客户端只需要关注比自己序号小的那个相关节点的变更情况</strong>就可以了–而不需要关注全局的子列表变更情况。</p>
+<h4 id="4-改进后的分布式锁实现"><a href="#4-改进后的分布式锁实现" class="headerlink" title="4.改进后的分布式锁实现"></a>4.改进后的分布式锁实现</h4><p>上面提到的共享锁实现,从整体思路上来说完全正确。这里主要的改动在于:<strong>每个锁竞争者,只需要关注&#x2F;sharedlock节点下序号比自己小的那个节点是否存在即可</strong>,具体实现如下。</p>
+<ol>
+<li>客户端调用create接口常见类似于&#x2F;shared_lock&#x2F;[Hostname]-请求类型-序号的临时顺序节点。</li>
+<li>客户端调用getChildren接口获取所有已经创建的子节点列表(不注册任何Watcher)。</li>
+<li>如果无法获取共享锁,就调用exist接口来对比自己小的节点注册Watcher,对于读请求:向比自己序号小的最后一个写请求节点注册Watcher监听。对于写请求:向比自己序号小的最后一个节点注册Watcher监听。</li>
+<li>等待Watcher通知,继续进入步骤2。</li>
+</ol>
+<p><img src="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20201112010535009.png" alt="image-20201112010535009"></p>
+<p>如同在多线程并发编程实践中,我们会去尽量缩小锁的范围——对于分布式锁实现的改进其实也是同样的思路。根据具体的业务场景和集群规模来选择适合自己的分布式锁实现:在<strong>集群规模不大、网络资源丰富的情况</strong>下,第一种分布式锁实现方式是简单实用的选择;而如果<strong>集群规模达到一定程度</strong>,并且希望能够<strong>精细化地控制分布式锁机制</strong>,那么就可以试试改进版的分布式锁实现。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>zookeeper</tag>
+      </tags>
   </entry>
 </search>

@@ -20,16 +20,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.flamingo-sky.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="搭建初衷：记录自己的学习笔记。   Github Pages 上搭建博客的弊端：  部署在 Github 上，需要科学上网 整个流程：撰写 md 文档 ——&gt; Hexo 生成静态网页 ——&gt; 部署到Github Pages ——&gt;  浏览 维护一个静态网站，需要有容灾和备份的意识和能力。">
+  <meta name="description" content="应朋友之邀写的博客搭建教程">
 <meta property="og:type" content="website">
 <meta property="og:title" content="如何使用 Github + Hexo 搭建博客">
 <meta property="og:url" content="https://www.flamingo-sky.com/2021/03/13/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Github%20+%20Hexo%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Sky&#96;s Blog">
-<meta property="og:description" content="搭建初衷：记录自己的学习笔记。   Github Pages 上搭建博客的弊端：  部署在 Github 上，需要科学上网 整个流程：撰写 md 文档 ——&gt; Hexo 生成静态网页 ——&gt; 部署到Github Pages ——&gt;  浏览 维护一个静态网站，需要有容灾和备份的意识和能力。">
+<meta property="og:description" content="应朋友之邀写的博客搭建教程">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cs-cshi/image-host/hexo-blog/version.png">
 <meta property="article:published_time" content="2021-03-13T01:47:57.000Z">
-<meta property="article:modified_time" content="2022-02-12T18:21:55.877Z">
+<meta property="article:modified_time" content="2022-02-12T19:57:36.693Z">
 <meta property="article:author" content="Sky">
 <meta property="article:tag" content="Hexo 博客">
 <meta property="article:tag" content="搭建环境">
@@ -93,9 +93,9 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">2</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">3</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -167,18 +167,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -201,7 +201,10 @@
     </div>
     <ul class="links-of-recent-posts-list">
         <li class="links-of-recent-posts-item">
-          <a href="/2022/02/13/test/" title="2022&#x2F;02&#x2F;13&#x2F;test&#x2F;">测试</a>
+          <a href="/2022/02/15/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="2022&#x2F;02&#x2F;15&#x2F;zookeeper学习笔记&#x2F;">zookeeper学习笔记</a>
+        </li>
+        <li class="links-of-recent-posts-item">
+          <a href="/2021/04/13/hexo%E4%BC%98%E5%8C%96/" title="2021&#x2F;04&#x2F;13&#x2F;hexo优化&#x2F;">hexo优化</a>
         </li>
         <li class="links-of-recent-posts-item">
           <a href="/2021/03/13/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Github%20+%20Hexo%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" title="2021&#x2F;03&#x2F;13&#x2F;如何使用 Github + Hexo 搭建博客&#x2F;">如何使用 Github + Hexo 搭建博客</a>
@@ -273,7 +276,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-02-13 02:21:55" itemprop="dateModified" datetime="2022-02-13T02:21:55+08:00">2022-02-13</time>
+      <time title="修改时间：2022-02-13 03:57:36" itemprop="dateModified" datetime="2022-02-13T03:57:36+08:00">2022-02-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -313,6 +316,7 @@
   
 </div>
 
+            <div class="post-description">应朋友之邀写的博客搭建教程</div>
         </div>
       </header>
 
@@ -355,7 +359,7 @@
 <p>Title 随便取个名字，粘贴复制的 id_rsa.pub 内容到 Key 中，点击 Add SSH key 完成添加。</p>
 <p><strong>验证连接</strong>：</p>
 <blockquote>
-<p>打开 Git Bash，输入 ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;</a> 出现 “Are you sure……”，输入 yes 回车确认</p>
+<p>打开 Git Bash，输入 ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a> 出现 “Are you sure……”，输入 yes 回车确认</p>
 </blockquote>
 <blockquote>
 <p>显示 “Hi xxx! You’ve successfully……” 即连接成功。</p>
@@ -502,8 +506,8 @@
             <div class="post-nav-item">
             </div>
             <div class="post-nav-item">
-                <a href="/2022/02/13/test/" rel="next" title="测试">
-                  测试 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/04/13/hexo%E4%BC%98%E5%8C%96/" rel="next" title="hexo优化">
+                  hexo优化 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
